@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+{%include "partials/nav.html" %}
+<div class="card">
+  <img class="card-img-top" src="" alt="Avatar">
+  <div class="card-block">
+    <h4 class="card-title">Name & StudentNum</h4>
+    <p class="card-text">Here is your profile.</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Cras justo odio</li>
+    <li class="list-group-item">Dapibus ac facilisis in</li>
+    <li class="list-group-item">Vestibulum at eros</li>
+  </ul>
+  <div class="card-block">
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div>
+</div>
+{%include "partials/footer.html" %}
+{% endblock %}
