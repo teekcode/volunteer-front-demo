@@ -4,17 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp test"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "bootstrap": "^4.0.0-alpha.6",
     "browser-sync": "^2.18.7",
+    "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-debug": "^3.0.0",
     "gulp-nunjucks-render": "^2.0.0",
     "gulp-plumber": "^1.1.0",
+    "gulp-rev": "^7.1.2",
     "gulp-sass": "^3.1.0",
     "node-sass": "^4.5.0"
   }

@@ -1,25 +1,25 @@
 // https://zellwk.com/blog/nunjucks-with-gulp/
 
-/*
-Usage: 
-1. run `gulp merge web` refresh the project
-2. run `gulp watch` thread 1
-3. run `gulp bs` thread 2
-*/
-
 var gulp = require('gulp'),
   debug = require('gulp-debug'),
   plumber = require('gulp-plumber'),
   nunjucksRender = require('gulp-nunjucks-render'),
   sass = require('gulp-sass'),
-  bs = require('browser-sync').create();
+  bs = require('browser-sync').create(),
+  del = require('del'),
+  rev = require('gulp-rev');
 
-gulp.task('merge-web', function() {
+gulp.task('clean-html', function() {
+  del.sync(['public/*.html']);
+})
+
+gulp.task('merge-html', ['clean-html'], function() {
   return gulp.src('source/pages/*.html')
-  .pipe(plumber())
+//  .pipe(plumber())
   .pipe(nunjucksRender({
       path: ['source/templates']
     }))
+  //.pipe(rev())
   .pipe(debug({minimal: true}))
   .pipe(gulp.dest('public'))
   
@@ -32,8 +32,8 @@ gulp.task('sass', function() {
 });
 
 gulp.task('watch', function(){
-    gulp.watch('source/**/*.html', ['merge-web']);
-    gulp.watch('source/templates/partials/*.html', ['merge-web']);
+    gulp.watch('source/**/*.html', ['merge-html']);
+    gulp.watch('source/templates/partials/*.html', ['merge-html']);
 });
 
 gulp.task('bs', function() {
@@ -45,3 +45,12 @@ gulp.task('bs', function() {
 
   gulp.watch('./public/*.html').on('change', bs.reload);
 })
+
+gulp.task('default', ['merge-html', 'watch', 'bs'])
+gulp.task('test', ['merge-html'])
+
+/* the following task is only the extend usage of npm package api */
+
+gulp.task('dry-clean', function() {
+  del(['public/**'],{dryRun: true}).then(paths => {console.log(paths.join('\n'))})
+});
